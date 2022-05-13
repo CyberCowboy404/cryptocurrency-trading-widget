@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TickerService } from 'src/app/core/services/ticker.service';
 import { TradeService } from 'src/app/core/services/trade.service';
 import { SymbolTicker } from 'src/app/core/types/ticker';
