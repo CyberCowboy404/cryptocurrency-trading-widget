@@ -1,0 +1,44 @@
+<mat-card class="trade-card">
+	<mat-card-subtitle>
+		Buy BTC
+		<span class="price" *ngIf="ticker$ | async as ticker">
+			<ng-container *ngIf="ticker.price ">
+				{{ ticker.price | number:'1.2' }}
+			</ng-container>
+		</span>
+	</mat-card-subtitle>
+	<mat-card-content>
+		<mat-button-toggle-group [(ngModel)]="orderType" aria-label="Order Type">
+			<mat-button-toggle value="MARKET">Market</mat-button-toggle>
+			<mat-button-toggle value="LIMIT">Limit</mat-button-toggle>
+			<mat-button-toggle value="STOPLIMIT">Stop-Limit</mat-button-toggle>
+		</mat-button-toggle-group>
+
+		<div class="order-form">
+			<ng-container [ngSwitch]="orderType">
+				<ng-container *ngSwitchCase="'MARKET'">
+					<app-market-order-form [symbol]="symbol"></app-market-order-form>
+				</ng-container>
+				<ng-container *ngSwitchCase="'LIMIT'">
+					<app-limit-order-form [symbol]="symbol"></app-limit-order-form>
+				</ng-container>
+				<ng-container *ngSwitchCase="'STOPLIMIT'">
+					<app-stop-limit-order-form [symbol]="symbol"></app-stop-limit-order-form>
+				</ng-container>
+			</ng-container>
+		</div>
+		
+	</mat-card-content>
+	<mat-divider inset></mat-divider>
+	
+	<mat-card-footer>
+		<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+	</mat-card-footer>
+</mat-card>
+
+<mat-card class="orders-card">
+	<mat-card-subtitle>
+		Orders
+	</mat-card-subtitle>
+	<app-orders-list [symbol]="symbol"></app-orders-list>
+</mat-card>

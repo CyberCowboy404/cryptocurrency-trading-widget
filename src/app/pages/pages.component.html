@@ -1,0 +1,26 @@
+<header>
+	<h1>Cryptocurrency exchange</h1>	
+	<div class="nav">
+		<a routerLink="trade/BTC_USDT" routerLinkActive="selected"><mat-icon>trending_up</mat-icon> Trade</a>
+		<a routerLink="deposit" routerLinkActive="selected"><mat-icon>payment</mat-icon> Deposit</a>
+	</div>
+</header>
+
+<mat-card *ngIf="balance$ | async as balances">
+	<mat-card-subtitle>
+		<div class="balances-row" >
+			<div>Balances:</div>
+			<div>
+				BTC: {{ balances.BTC.free | number:'1.4' }} 
+				<span class="locked">/ <mat-icon>lock</mat-icon> {{ balances.BTC.locked | number:'1.4' }}</span>
+			</div>
+			<div>
+				USDT: {{ balances.USDT.free| number:'1.2' }} 
+				<span class="locked">/ <mat-icon>lock</mat-icon> {{ balances.USDT.locked| number:'1.2' }}</span>
+			</div>
+		</div>
+	</mat-card-subtitle>
+</mat-card>
+<article class="main">
+	<router-outlet></router-outlet>
+</article>

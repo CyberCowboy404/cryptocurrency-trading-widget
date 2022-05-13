@@ -1,0 +1,70 @@
+<ng-container *ngIf="orders?.length else emptyDataTemplate">
+	<table mat-table [dataSource]="orders">
+	
+		<!-- Id Column -->
+		<ng-container matColumnDef="id">
+			<th mat-header-cell *matHeaderCellDef> No. </th>
+			<td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+		</ng-container>
+	
+		<!-- Side Column -->
+		<ng-container matColumnDef="side">
+			<th mat-header-cell *matHeaderCellDef> Side </th>
+			<td mat-cell *matCellDef="let element"> {{ enumKeys.OrderSide[element.side] }} </td>
+		</ng-container>
+
+		<!-- Type Column -->
+		<ng-container matColumnDef="type">
+			<th mat-header-cell *matHeaderCellDef> Type </th>
+			<td mat-cell *matCellDef="let element"> {{ enumKeys.OrderType[element.type] }} </td>
+		</ng-container>
+
+		<!-- Status Column -->
+		<ng-container matColumnDef="status">
+			<th mat-header-cell *matHeaderCellDef> Status </th>
+			<td mat-cell *matCellDef="let element"> {{ enumKeys.OrderStatus[element.status] }} </td>
+		</ng-container>
+	
+		<!-- Price Column -->
+		<ng-container matColumnDef="price">
+			<th mat-header-cell *matHeaderCellDef> Price </th>
+			<td mat-cell *matCellDef="let element"> 
+				<ng-container *ngIf="element.status == enumKeys.OrderStatus.FILLED; else emptyDataTemplate" >
+					{{ element.price | number:'1.2' }}
+				</ng-container>
+			</td>
+		</ng-container>
+
+		<!-- Amount Column -->
+		<ng-container matColumnDef="amount">
+			<th mat-header-cell *matHeaderCellDef> Amount </th>
+			<td mat-cell *matCellDef="let element"> {{ element.amount }} </td>
+		</ng-container>
+
+		<!-- Price Column -->
+		<ng-container matColumnDef="limitPrice">
+			<th mat-header-cell *matHeaderCellDef> Limit Price </th>
+			<td mat-cell *matCellDef="let element">
+				<ng-container *ngIf="element.limitPrice; else emptyDataTemplate">
+					{{ element.limitPrice | number:'1.2' }}
+				</ng-container>
+			</td>
+		</ng-container>
+
+		<!-- Stop-Limit Column -->
+		<ng-container matColumnDef="stopPrice">
+			<th mat-header-cell *matHeaderCellDef> Stop </th>
+			<td mat-cell *matCellDef="let element">
+				<ng-container *ngIf="element.stopPrice; else emptyDataTemplate">
+					{{ element.stopPrice | number:'1.2' }}
+				</ng-container>
+			</td>
+		</ng-container>
+	
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</table>
+</ng-container>
+<ng-template #emptyDataTemplate>
+	-
+</ng-template>

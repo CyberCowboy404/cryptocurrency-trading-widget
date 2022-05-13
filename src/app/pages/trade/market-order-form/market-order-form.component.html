@@ -1,0 +1,16 @@
+<form [formGroup]="orderForm" autocomplete="chrome-off" autocomplete="chrome-off">
+	<mat-form-field appearance="legacy">
+		<mat-label>Price</mat-label>
+		<input formControlName="price" matInput placeholder="Price" readonly>
+	</mat-form-field>
+
+	<mat-form-field appearance="legacy">
+		<mat-label>Amount</mat-label>
+		<input formControlName="amount" matInput placeholder="Amount">
+		<div matSuffix>BTC</div>
+		<mat-hint class="mat-hint-error" *ngIf="errors?.insufficientFunds">Insufficient funds</mat-hint>
+	</mat-form-field>
+
+	<button class="submit-button" mat-flat-button color="primary" [disabled]="orderForm.invalid" (click)="order()">Buy
+		BTC</button>
+</form>

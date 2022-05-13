@@ -1,0 +1,18 @@
+<mat-card class="deposit-card">
+	<mat-card-subtitle>
+		Deposit USDT
+	</mat-card-subtitle>
+	<mat-card-content>
+		<div class="deposit-form">
+			<form [formGroup]="depositForm" autocomplete="chrome-off" autocomplete="chrome-off">
+				<mat-form-field appearance="legacy">
+					<mat-label>Amount</mat-label>
+					<input formControlName="amount" matInput placeholder="Amount">
+				</mat-form-field>
+
+				<button class="submit-button" mat-flat-button color="primary" [disabled]="depositForm.invalid" (click)="order()">Pay
+					USDT</button>
+			</form>
+		</div>
+	</mat-card-content>
+</mat-card>
